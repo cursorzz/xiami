@@ -28,6 +28,7 @@ def get_list code
     url = "http://www.xiami.com/song/playlist/id/#{code}/type/1"
 
     doc = Nokogiri::XML(open(url))
+    puts track_info doc
     url_list = []
     doc.css('location').each do |l|
         url_list << decode(l.content)
@@ -44,5 +45,15 @@ def search key
         album[link.text] = link.href.match(/\d+/).to_s
     end
     album
+end
+
+def track_info doc
+    info = Array.new
+    doc.css('track').each do |t|
+        track = Hash.new
+        t.children.each {|c| track[c.name] = ( if c.name == 'location'; decode c.text;else c.text;end) }
+        info << track
+    end
+    info
 end
     

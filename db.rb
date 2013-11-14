@@ -2,7 +2,7 @@ require 'data_mapper'
 
 DataMapper::Logger.new($stdout, :debug)
 
-DataMapper.setup(:default, 'sqlite::memory:')
+DataMapper.setup(:default, "sqlite://#{Dir.pwd}/develop.db")
 
 class Track
     include DataMapper::Resource
@@ -17,9 +17,10 @@ class Music
     property :id,    Serial
     property :title, String
     property :url,   String
+    property :lyric, Text
 
     belongs_to :track
 end
 
-DataMapper.finalize
-
+#DataMapper.finalize
+DataMapper.auto_upgrade!

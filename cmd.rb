@@ -6,7 +6,6 @@ def pp input
     if input.is_a? Hash
         input = input.entries
     end
-    print input, 'dsfas'
     input.each_with_index {|pair, index| puts "#{index}: #{pair[0]}"} if input
     input
 end
@@ -31,17 +30,23 @@ def save(result_list)
     result_list
 end
 
-def play play_path
-    `mplayer -playlist #{play_path}`
+def play list
+    `mplayer -playlist #{list.join(' ')}`
+end
+
+def play2 list
+    `mpg123 #{list.join(' ')}`
 end
 
 albums = ask("album:") do |q|
     search q
 end
 
-ask('choose one') do |index|
+play_list = ask('choose one') do |index|
     code = albums[index.to_i][1]
     save get_list(code)
 end
 
-play (Dir.tmpdir + '/playlist')
+#play (Dir.tmpdir + '/playlist')
+#p play_list
+play2 play_list
