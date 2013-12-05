@@ -8,7 +8,8 @@ class Track
     include DataMapper::Resource
     property :id, Serial
     property :name, String
-
+    property :track_id, String
+    property :artist, String
     has n, :musics
 end
 
@@ -22,5 +23,5 @@ class Music
     belongs_to :track
 end
 
-#DataMapper.finalize
+DataMapper.finalize
 DataMapper.auto_upgrade!

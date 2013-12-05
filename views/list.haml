@@ -1,4 +1,5 @@
 !!! 5
+- @url_list = []
 %head
   %script{ :src => "http://code.jquery.com/jquery-1.10.1.min.js" }
 
@@ -9,7 +10,7 @@
     .results
   #content
     %audio{ :controls => 'controls' }
-      %source{ :src => @url_list.first, :type => 'audio/mpeg'}
+      %source{ :src => 'http://m3.file.xiami.com/h/gWudE4hNvTxmh6eeSLAxcCwZ4OfQGzmH%2BY9Qj44yvwAiO48BYYLmkZCYRA5X2ymQrFwce7id2TlGcLJDdpmj', :type => 'audio/mpeg'}
   - @url_list.each do |url|
     %a{ :href => url }= url
     %br/
